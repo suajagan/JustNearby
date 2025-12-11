@@ -1,35 +1,65 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useEffect, useState } from "react";
+import { loadUser } from "./api/UserApi.ts";
 
-function App() {
-  const [count, setCount] = useState(0)
+import LandingPage from "./pages/LandingPage";
+import LoginPage from "./pages/LoginPage";
+import SignUpPage from "./pages/SignUpPage";
+import UserStatus from "./components/UserStatus";
 
-  return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+type UserData = {
+    login?: string;
+    name?: string;
+    email?: string;
+    [key: string]: unknown;
+};
+
+export default function App() {
+
+    const [user, setUser] = useState<UserData | null | undefined>(undefined);
+
+    const [screen, setScreen] = useState<"landing" | "login" | "signup">("landing");
+
+    useEffect(() => {
+        loadUser().then(setUser);
+    }, []);
+
+    function loginWithGithub(forceSelect = false) {
+        const host = window.location.host === "localhost:5173"
+            ? "http://localhost:8080"
+            : window.location.origin;
+
+        const baseUrl = host + "/oauth2/authorization/github";
+        const url = forceSelect ? baseUrl + "?prompt=select_account" : baseUrl;
+
+        window.open(url, "_self");
+    }
+
+
+    return (
+        <>
+            <UserStatus user={user} />
+
+            {screen === "landing" && (
+                <LandingPage
+                    goToLogin={() => setScreen("login")}
+                    goToSignUp={() => setScreen("signup")}
+                />
+            )}
+
+            {screen === "login" && (
+                <LoginPage
+                    onLogin={() => loginWithGithub(false)}
+                    onLoginOther={() => loginWithGithub(true)}
+                    goToSignUp={() => setScreen("signup")}
+                />
+            )}
+
+            {screen === "signup" && (
+                <SignUpPage
+                    onSignUp={loginWithGithub}
+                    goToLogin={() => setScreen("login")}
+                />
+            )}
+        </>
+    );
 }
-
-export default App
