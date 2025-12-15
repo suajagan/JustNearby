@@ -1,17 +1,9 @@
-import LoginBox from "../components/LoginBox";
+import LoginForm from "../components/LoginForm";
 
-type Props = {
-    onLogin: () => void;
-    onLoginOther: () => void;
-    goToSignUp: () => void;
-};
-
-export default function LoginPage({ onLogin, onLoginOther, goToSignUp }: Props) {
+export default function LoginPage() {
     return (
-        <LoginBox
-            onLogin={onLogin}
-            onLoginOther={onLoginOther}
-            onGoToSignUp={goToSignUp}
-        />
+        <div>
+            <LoginForm />
+        </div>
     );
 }

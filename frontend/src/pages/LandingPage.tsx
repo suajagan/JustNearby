@@ -1,21 +1,13 @@
-type Props = {
-    goToLogin: () => void;
-    goToSignUp: () => void;
-};
-
-export default function LandingPage({ goToLogin, goToSignUp }: Props) {
+export default function LandingPage() {
     return (
-        <div className="box">
-            <h1>JustNearby</h1>
-            <p>Connect with your neighborhood</p>
+        <main className="hero">
+            <div className="hero-text">
+                <h1>JUSTNEARBY IN <span>AACHEN</span></h1>
+                <p>
+                    JustNearby helps neighbors connect, share help, and build stronger local communities.
+                </p>
 
-            <button className="primary-btn" onClick={goToSignUp}>
-                Sign Up
-            </button>
-
-            <button className="primary-btn" onClick={goToLogin}>
-                Login
-            </button>
-        </div>
+            </div>
+        </main>
     );
 }
