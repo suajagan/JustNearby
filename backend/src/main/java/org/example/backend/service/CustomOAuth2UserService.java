@@ -9,6 +9,7 @@ import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class CustomOAuth2UserService extends DefaultOAuth2UserService {
@@ -41,9 +42,14 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
                         email,
                         null,
                         "GITHUB",
-                        login
+                        login,
+                        null,
+                        null,
+                        null,
+                        Set.of(),
+                        null,
+                        false
                 );
-
                 repository.save(newUser);
             } else {
 

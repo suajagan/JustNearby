@@ -1,0 +1,15 @@
+
+.landing {
+    text-align: center;
+    margin-top: 80px;
+}
+
+.landing button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    border-radius: 6px;
+    border: none;
+    background: black;
+    color: white;
+    cursor: pointer;
+}

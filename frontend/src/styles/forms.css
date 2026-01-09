@@ -1,0 +1,28 @@
+
+.modal-form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.modal-form input {
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+}
+
+.modal-form button {
+    padding: 10px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+}
+
+
+.error {
+    color: red;
+    margin-top: 8px;
+    font-size: 14px;
+    text-align: center;
+}

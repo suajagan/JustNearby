@@ -17,6 +17,7 @@ import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import java.util.Optional;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -45,7 +46,13 @@ public class AuthController {
                 signUpRequest.email(),
                 encoder.encode(signUpRequest.password()),
                 "LOCAL",
-                null
+                null,
+                null,
+                null,
+                null,
+                Set.of(),
+                null,
+                false
         );
 
         repository.save(newUser);

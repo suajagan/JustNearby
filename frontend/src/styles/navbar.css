@@ -1,0 +1,33 @@
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 24px;
+    background: #bde66a;
+    border-bottom: 1px solid #ddd;
+}
+
+.navbar-left h2 { margin: 0; }
+
+.logo {
+    font-weight: bold;
+    text-decoration: none;
+    color: #222;
+}
+
+.navbar-right,
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.navbar-right button {
+    padding: 6px 14px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.navbar-right button:hover { opacity: 0.9; }
