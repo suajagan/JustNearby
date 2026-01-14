@@ -1,0 +1,79 @@
+.frq-page {
+    padding: 16px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.frq-header {
+    margin-bottom: 12px;
+}
+
+.frq-title {
+    margin: 0;
+}
+
+.frq-subtitle {
+    margin: 6px 0 0 0;
+    opacity: 0.75;
+}
+
+.frq-alert {
+    margin: 12px 0;
+    padding: 10px 12px;
+    border-radius: 10px;
+    border: 1px solid #ffb4b4;
+    background: #ffe9e9;
+}
+
+.frq-loading,
+.frq-empty {
+    margin-top: 14px;
+    opacity: 0.8;
+}
+
+.frq-list {
+    display: grid;
+    gap: 10px;
+    margin-top: 12px;
+}
+
+.frq-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 12px;
+    border: 1px solid #e6e6e6;
+    border-radius: 12px;
+}
+
+.frq-info {
+    display: grid;
+    gap: 6px;
+}
+
+.frq-line {
+    display: flex;
+    gap: 10px;
+    align-items: baseline;
+}
+
+.frq-label {
+    font-weight: 700;
+    opacity: 0.75;
+    min-width: 48px;
+}
+
+.frq-value {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    font-size: 13px;
+}
+
+.frq-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.frq-btn {
+    white-space: nowrap;
+}
