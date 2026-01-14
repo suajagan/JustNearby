@@ -45,15 +45,21 @@ export default function PostDetailsPage() {
             .finally(() => setLoading(false));
     }, [id]);
 
+    const loadComments = async (postId: string) => {
+        setLoadingComments(true);
+        try {
+            const data = await getComments(postId);
+            setComments(data);
+        } finally {
+            setLoadingComments(false);
+        }
+    };
+
     useEffect(() => {
         if (!id) return;
-
-        setLoadingComments(true);
-        getComments(id)
-            .then(setComments)
-            .catch(() => setComments([]))
-            .finally(() => setLoadingComments(false));
+        loadComments(id);
     }, [id]);
+
 
     const handleAddComment = async () => {
         if (!id) return;
@@ -64,15 +70,16 @@ export default function PostDetailsPage() {
 
         try {
             setCommentSaving(true);
-            const created = await createComment(id, txt);
-            setComments((prev) => [...prev, created]);
+            await createComment(id, txt);
             setCommentText("");
+            await loadComments(id);
         } catch (e) {
             setCommentError(e instanceof Error ? e.message : "Failed to add comment");
         } finally {
             setCommentSaving(false);
         }
     };
+
 
     const images = post?.imageUrls ?? [];
 
@@ -146,7 +153,7 @@ export default function PostDetailsPage() {
                 )}
             </div>
             <div className="comments">
-                <h3 className="comments-title">Comments</h3>
+                <h3 className="comments-title">Comments ({comments.length})</h3>
 
                 {loadingComments && <p>Loading comments…</p>}
 
@@ -185,23 +192,29 @@ export default function PostDetailsPage() {
                 )}
 
                 <div className="comment-form">
-    <textarea
-        value={commentText}
-        onChange={(e) => setCommentText(e.target.value)}
-        rows={3}
-        placeholder="Write a comment…"
-    />
-
+                   <textarea
+                       value={commentText}
+                       onChange={(e) => setCommentText(e.target.value)}
+                       onKeyDown={(e) => {
+                           if ((e.ctrlKey || e.metaKey) && e.key === "Enter") {
+                               e.preventDefault();
+                               handleAddComment();
+                           }
+                       }}
+                       rows={3}
+                       placeholder="Write a comment…"
+                   />
                     {commentError && <p className="error">{commentError}</p>}
 
                     <button
                         className="primary-btn"
                         type="button"
                         onClick={handleAddComment}
-                        disabled={commentSaving}
+                        disabled={commentSaving || commentText.trim().length === 0}
                     >
                         {commentSaving ? "Posting…" : "Add Comment"}
                     </button>
+
                 </div>
             </div>
 

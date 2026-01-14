@@ -23,11 +23,12 @@ public class PostController {
         return postService.create(request, auth);
     }
 
-
     @GetMapping
-    public List<PostResponse> list(@RequestParam(required = false)PostCategory category){
-        return postService.list(category);
+    public List<PostResponse> list(@RequestParam(required = false) PostCategory category,
+                                   Authentication auth) {
+        return postService.list(category, auth);
     }
+
     @GetMapping("/{id}")
     public PostResponse getById(@PathVariable String id) {
         return postService.getById(id);
