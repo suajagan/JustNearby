@@ -47,7 +47,8 @@ class ProfileControllerTest {
                                 "Handyman nearby",
                                 Set.of("HANDYMAN"),
                                 null,
-                                true
+                                true,
+                                Set.of()
                         )
                 ));
 

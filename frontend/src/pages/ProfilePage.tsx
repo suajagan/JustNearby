@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
     getMyProfile,
     updateMyProfile,
@@ -6,9 +7,6 @@ import {
     type ProfileUpdateRequest,
 } from "../api/profileApi";
 
-/* -------------------------------
-   AVAILABLE ROLES
--------------------------------- */
 const AVAILABLE_ROLES = [
     "HANDYMAN",
     "ELECTRICIAN",
@@ -32,9 +30,6 @@ function formatRole(role: string) {
         .join(" ");
 }
 
-/* -------------------------------
-   FORM STATE
--------------------------------- */
 type ProfileFormState = {
     phoneNumber?: string;
     address?: {
@@ -55,10 +50,8 @@ export default function ProfilePage() {
     const [loading, setLoading] = useState(true);
     const [saving, setSaving] = useState(false);
     const [error, setError] = useState<string | null>(null);
+    const navigate = useNavigate();
 
-    /* -------------------------------
-       LOAD PROFILE
-    -------------------------------- */
     useEffect(() => {
         getMyProfile()
             .then((data) => {
@@ -75,9 +68,6 @@ export default function ProfilePage() {
             .finally(() => setLoading(false));
     }, []);
 
-    /* -------------------------------
-       HANDLERS
-    -------------------------------- */
     const handleChange = <K extends keyof ProfileFormState>(
         field: K,
         value: ProfileFormState[K]
@@ -125,6 +115,9 @@ export default function ProfilePage() {
             const updated = await updateMyProfile(payload);
             setProfile(updated);
             setEditing(false);
+            if (updated.profileComplete) {
+                navigate("/home");
+            }
         } catch {
             setError("Failed to save profile");
         } finally {
