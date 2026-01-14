@@ -15,6 +15,7 @@ public record Post(
         String title,
         String description,
         String locationText,
+        String authorId,
         String authorName,
         String authorRole,
         String authorProfileImageUrl,
