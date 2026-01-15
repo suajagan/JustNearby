@@ -1,0 +1,17 @@
+
+.primary-btn {
+    background: black;
+    color: white;
+}
+
+.github-btn {
+    width: 100%;
+    margin-top: 10px;
+    background: #eee;
+    border: none;
+    padding: 10px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.github-btn:hover { background: #ddd; }

@@ -1,0 +1,8 @@
+.interested-chip {
+    border-color: #d6f3b2;
+    background: #f3ffe6;
+}
+
+.interested-chip:hover {
+    background: #e9ffd0;
+}
