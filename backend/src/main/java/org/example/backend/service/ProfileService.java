@@ -10,6 +10,8 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 
+import java.util.Set;
+
 @Service
 public class ProfileService {
 
@@ -52,8 +54,10 @@ public class ProfileService {
                 request.bio() != null ? request.bio() : user.bio(),
                 request.roles() != null ? request.roles() : user.roles(),
                 request.profileImageUrl() != null ? request.profileImageUrl() : user.profileImageUrl(),
-                profileComplete
+                profileComplete,
+                user.friendIds() != null ? user.friendIds() : Set.of()
         );
+
 
         repository.save(updatedUser);
 

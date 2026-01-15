@@ -48,7 +48,8 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
                         null,
                         Set.of(),
                         null,
-                        false
+                        false,
+                        Set.of()
                 );
                 repository.save(newUser);
             } else {

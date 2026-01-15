@@ -1,6 +1,9 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import type { User } from "../types/User";
+import Modal from "./Modal";
+import CategoryPickerModal from "./CategoryPickerModal";
+import type { PostCategory } from "../api/postApi";
 
 type HeaderProps = {
     user: User | null | undefined;
@@ -18,6 +21,7 @@ export default function Header({
                                    onLogout,
                                }: HeaderProps) {
     const [menuOpen, setMenuOpen] = useState(false);
+    const [pickerOpen, setPickerOpen] = useState(false);
     const navigate = useNavigate();
 
     const displayName =
@@ -30,31 +34,49 @@ export default function Header({
                 <Link to="/" className="logo">
                     JustNearby
                 </Link>
+
+                {user && (
+                    <>
+                        <input
+                            className="top-search"
+                            placeholder="Search"
+                            readOnly
+                            onClick={() => setPickerOpen(true)}
+                        />
+
+                    </>
+                )}
             </div>
 
             <div className="navbar-right">
                 {!user && (
-                    <>
-                        <button onClick={onLogin}>Login</button>
-                        <button onClick={onSignup}>Register</button>
-                    </>
+                    <div className="auth-actions">
+                        <button className="nav-btn" onClick={onLogin}>Login</button>
+                        <button className="nav-btn nav-btn-primary" onClick={onSignup}>Register</button>
+                    </div>
                 )}
 
                 {user && (
                     <div className="profile-menu">
                         <span className="welcome">Hi {displayName}</span>
 
-                        <div className="avatar" onClick={() => setMenuOpen((v) => !v)}>
+                        <button
+                            type="button"
+                            className="avatar"
+                            onClick={() => setMenuOpen((v) => !v)}
+                            aria-label="Open menu"
+                        >
                             {profileImageUrl ? (
                                 <img className="avatar-img" src={profileImageUrl} alt="Profile" />
                             ) : (
                                 <span className="avatar-letter">{avatarLetter}</span>
                             )}
-                        </div>
+                        </button>
 
                         {menuOpen && (
                             <div className="dropdown">
                                 <button
+                                    className="dropdown-item"
                                     onClick={() => {
                                         setMenuOpen(false);
                                         navigate("/profile");
@@ -64,6 +86,7 @@ export default function Header({
                                 </button>
 
                                 <button
+                                    className="dropdown-item"
                                     onClick={() => {
                                         setMenuOpen(false);
                                         navigate("/account");
@@ -73,6 +96,7 @@ export default function Header({
                                 </button>
 
                                 <button
+                                    className="dropdown-item danger"
                                     onClick={() => {
                                         setMenuOpen(false);
                                         onLogout();
@@ -85,6 +109,17 @@ export default function Header({
                     </div>
                 )}
             </div>
+
+            {pickerOpen && (
+                <Modal onClose={() => setPickerOpen(false)}>
+                    <CategoryPickerModal
+                        onPick={(cat: PostCategory) => {
+                            setPickerOpen(false);
+                            navigate(`/home?category=${cat}`);
+                        }}
+                    />
+                </Modal>
+            )}
         </nav>
     );
 }

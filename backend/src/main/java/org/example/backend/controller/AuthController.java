@@ -52,7 +52,8 @@ public class AuthController {
                 null,
                 Set.of(),
                 null,
-                false
+                false,
+                Set.of()
         );
 
         repository.save(newUser);

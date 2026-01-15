@@ -18,12 +18,12 @@ export type CreatePostRequest = {
     authorRole?: string;
     authorProfileImageUrl?: string | null;
     offerType?: OfferType;
-    price?: number; // required if offerType=SELL (we enforce in UI next)
+    price?: number;
     currency?: "EUR";
     condition?: ItemCondition;
     itemCategory?: string;
-    eventStart?: string;     // ISO string
-    eventEnd?: string;       // ISO string
+    eventStart?: string;
+    eventEnd?: string;
     eventLocation?: string;
     isPublic?: boolean;
     imageUrls?: string[];
@@ -47,8 +47,8 @@ export type PostResponse = {
     currency?: string;
     condition?: ItemCondition;
     itemCategory?: string;
-    eventStart?: string;     // ISO string
-    eventEnd?: string;       // ISO string
+    eventStart?: string;
+    eventEnd?: string;
     eventLocation?: string;
     isPublic?: boolean;
     imageUrls?: string[];

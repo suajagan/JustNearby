@@ -19,5 +19,6 @@ public record AppUser(
         String bio,
         Set<String> roles,
         String profileImageUrl,
-        boolean profileComplete
+        boolean profileComplete,
+        Set<String> friendIds
 ) { }

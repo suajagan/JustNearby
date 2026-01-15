@@ -8,3 +8,10 @@
 @import "./styles/dropdown.css";
 @import "./styles/completion.css";
 @import "./styles/posts.css";
+@import "./styles/NearbyPeoplePage.css";
+@import "./styles/FriendRequestsPage.css";
+@import "./styles/shell.css";
+@import "./styles/categoryPicker.css";
+@import "./styles/ConversationsPage.css";
+@import "./styles/chatModal.css";
+@import "./styles/marketplaceChat.css";
